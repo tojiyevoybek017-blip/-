@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antikorrupsiya – Murojaat Portali</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;900&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070d1f;
+  --bg2:#0b1429;
+  --bg3:#0f1b36;
+  --gold:#c8a73e;
+  --gold2:#e2be56;
+  --gold3:#f4d978;
+  --red:#c0392b;
+  --red2:#e74c3c;
+  --green:#1a8a52;
+  --green2:#2ecc71;
+  --txt:#ddd8cc;
+  --txt2:#8f8a7e;
+  --txt3:#4a4640;
+  --border:rgba(200,167,62,0.14);
+  --shadow:0 32px 100px rgba(0,0,0,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'IBM Plex Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+
+/* --- BG EFFECTS --- */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 900px 600px at 15% 5%,rgba(200,167,62,0.055) 0%,transparent 70%),
+    radial-gradient(ellipse 700px 700px at 85% 95%,rgba(20,60,140,0.12) 0%,transparent 70%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(200,167,62,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(200,167,62,0.025) 1px,transparent 1px);
+  background-size:64px 64px;}
+
+.wrap{position:relative;z-index:1;}
+
+/* --- HEADER --- */
+header{
+  padding:16px 28px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:rgba(7,13,31,0.88);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-box{
+  width:42px;height:42px;
+  background:linear-gradient(145deg,var(--gold),var(--gold2));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  box-shadow:0 4px 18px rgba(200,167,62,0.28),0 2px 0 rgba(255,255,255,0.15) inset;
+  transform:perspective(80px) rotateX(4deg) rotateY(-4deg);
+  transition:transform .3s;
+}
+.logo-box:hover{transform:perspective(80px) rotateX(0) rotateY(0);}
+.logo-title{font-family:'Unbounded',sans-serif;font-size:12px;font-weight:700;color:var(--gold2);letter-spacing:.1em;line-height:1.2;}
+.logo-sub{font-size:10px;color:var(--txt2);letter-spacing:.06em;margin-top:2px;}
+.header-badge{
+  display:flex;align-items:center;gap:7px;
+  background:rgba(30,138,82,0.12);border:1px solid rgba(46,204,113,0.2);
+  border-radius:50px;padding:6px 14px;font-size:11px;color:#5dde90;
+}
+.header-badge .dot{width:6px;height:6px;background:#2ecc71;border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+
+/* --- HERO --- */
+.hero{text-align:center;padding:56px 20px 36px;max-width:800px;margin:0 auto;}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(200,167,62,0.08);border:1px solid rgba(200,167,62,0.22);
+  color:var(--gold3);font-size:11px;padding:5px 16px;border-radius:50px;
+  margin-bottom:22px;letter-spacing:.1em;text-transform:uppercase;
+}
+.hero h1{
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(20px,4.5vw,44px);font-weight:900;
+  line-height:1.15;color:var(--txt);margin-bottom:14px;
+}
+.hero h1 em{color:var(--gold2);font-style:normal;}
+.hero p{font-size:15px;color:var(--txt2);line-height:1.75;max-width:540px;margin:0 auto;}
+
+/* --- SECRET BANNER --- */
+.secret{
+  display:flex;align-items:center;gap:14px;
+  background:linear-gradient(135deg,rgba(26,138,82,0.12),rgba(46,204,113,0.05));
+  border:1px solid rgba(46,204,113,0.2);
+  border-radius:14px;padding:16px 20px;
+  max-width:700px;margin:20px auto 0;
+}
+.secret-icon{font-size:28px;flex-shrink:0;}
+.secret h4{font-size:12px;font-weight:600;color:#5dde90;margin-bottom:4px;letter-spacing:.04em;}
+.secret p{font-size:12px;color:var(--txt2);line-height:1.6;}
+
+/* --- FORM WRAPPER --- */
+.form-wrap{max-width:740px;margin:0 auto;padding:24px 20px 80px;}
+
+/* --- CARD --- */
+.card{
+  background:linear-gradient(155deg,rgba(255,255,255,0.048),rgba(255,255,255,0.012));
+  border:1px solid var(--border);border-radius:22px;
+  padding:36px 34px;
+  box-shadow:var(--shadow),0 0 90px rgba(200,167,62,0.035),0 2px 0 rgba(200,167,62,0.12) inset;
+  backdrop-filter:blur(10px);
+  transform:perspective(1400px) rotateX(.4deg);
+  transition:transform .4s,box-shadow .4s;
+}
+.card:hover{transform:perspective(1400px) rotateX(0) translateY(-3px);box-shadow:0 40px 120px rgba(0,0,0,0.65),0 0 100px rgba(200,167,62,0.05),0 2px 0 rgba(200,167,62,0.18) inset;}
+@media(max-width:500px){.card{padding:24px 18px;border-radius:16px;}}
+
+.section-head{
+  font-family:'Unbounded',sans-serif;font-size:9.5px;letter-spacing:.18em;
+  color:var(--gold);text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;margin-bottom:22px;
+}
+.section-head::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(200,167,62,.28),transparent);}
+.section-head+.card-sub{font-size:12px;color:var(--txt3);margin-top:-14px;margin-bottom:20px;}
+
+/* --- FORM ELEMENTS --- */
+.fg{margin-bottom:20px;}
+.fg label{display:block;font-size:12px;font-weight:500;color:var(--txt2);margin-bottom:7px;letter-spacing:.03em;}
+.req{color:var(--gold2);margin-left:2px;}
+.fc{
+  width:100%;padding:12px 15px;
+  background:rgba(255,255,255,0.036);
+  border:1px solid rgba(200,167,62,0.14);
+  border-radius:10px;color:var(--txt);
+  font-family:'IBM Plex Sans',sans-serif;font-size:14px;
+  outline:none;transition:border-color .2s,background .2s,box-shadow .2s;
+  -webkit-appearance:none;
+}
+.fc::placeholder{color:var(--txt3);}
+.fc:focus{border-color:rgba(200,167,62,.42);background:rgba(255,255,255,.052);box-shadow:0 0 0 3px rgba(200,167,62,.07);}
+select.fc option{background:#0b1429;color:var(--txt);}
+textarea.fc{resize:vertical;min-height:115px;}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:560px){.row2{grid-template-columns:1fr;}}
+
+/* ERROR */
+.err{display:none;font-size:11px;color:#f1948a;margin-top:5px;}
+.fg.error .fc,.fg.error .upload-zone{border-color:rgba(192,57,43,.5);}
+.fg.error .err{display:block;}
+
+/* --- UPLOAD --- */
+.upload-zone{
+  border:2px dashed rgba(200,167,62,.18);
+  border-radius:14px;padding:30px 20px;
+  text-align:center;cursor:pointer;
+  transition:all .25s;background:rgba(200,167,62,.018);position:relative;
+}
+.upload-zone:hover,.upload-zone.drag{border-color:rgba(200,167,62,.5);background:rgba(200,167,62,.04);}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upload-icon{font-size:34px;margin-bottom:8px;}
+.upload-zone h4{font-size:13px;color:var(--txt);margin-bottom:5px;}
+.upload-zone small{font-size:11px;color:var(--txt2);}
+.type-chips{display:flex;gap:7px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+.chip{padding:3px 12px;border-radius:50px;font-size:10px;letter-spacing:.06em;border:1px solid;}
+.chip.v{border-color:rgba(226,190,86,.4);color:var(--gold3);background:rgba(226,190,86,.07);}
+.chip.i{border-color:rgba(93,222,144,.4);color:#5dde90;background:rgba(93,222,144,.07);}
+.chip.a{border-color:rgba(179,157,219,.4);color:#ce93d8;background:rgba(179,157,219,.07);}
+.file-list{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.file-item{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);border-radius:8px;padding:8px 13px;font-size:12px;}
+.fi-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt);}
+.fi-size{font-size:11px;color:var(--txt3);}
+.fi-del{cursor:pointer;color:var(--txt3);transition:color .2s;font-size:15px;padding:2px;}
+.fi-del:hover{color:#e74c3c;}
+
+/* --- WARNING --- */
+.warning{
+  background:linear-gradient(135deg,rgba(192,57,43,.11),rgba(231,76,60,.04));
+  border:1px solid rgba(192,57,43,.28);
+  border-left:3px solid var(--red2);
+  border-radius:10px;padding:15px 18px;margin-bottom:22px;
+}
+.warning h4{font-size:12px;font-weight:600;color:#f1948a;margin-bottom:6px;}
+.warning p{font-size:12px;color:var(--txt2);line-height:1.65;}
+
+/* --- AGREE --- */
+.agree{
+  display:flex;align-items:flex-start;gap:12px;
+  background:rgba(200,167,62,.04);border:1px solid rgba(200,167,62,.1);
+  border-radius:10px;padding:14px;margin-bottom:20px;cursor:pointer;
+}
+.agree input{width:17px;height:17px;accent-color:var(--gold2);flex-shrink:0;margin-top:2px;cursor:pointer;}
+.agree label{font-size:12px;color:var(--txt2);line-height:1.65;cursor:pointer;}
+.agree label b{color:var(--txt);}
+
+/* --- SUBMIT --- */
+.btn-submit{
+  width:100%;padding:16px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none;border-radius:12px;
+  color:#07121e;font-family:'Unbounded',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:.1em;
+  cursor:pointer;position:relative;overflow:hidden;
+  box-shadow:0 6px 28px rgba(200,167,62,.3),0 2px 0 rgba(255,255,255,.18) inset;
+  transform:perspective(300px) rotateX(1deg);
+  transition:all .3s;
+}
+.btn-submit:hover{transform:perspective(300px) rotateX(0) translateY(-2px);box-shadow:0 10px 40px rgba(200,167,62,.4),0 2px 0 rgba(255,255,255,.22) inset;}
+.btn-submit:active{transform:scale(.99);}
+.btn-submit .shine{position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);transform:translateX(-100%);transition:transform .4s;}
+.btn-submit:hover .shine{transform:translateX(100%);}
+.spinner{display:none;width:18px;height:18px;border:2px solid rgba(7,18,30,.3);border-top-color:var(--bg);border-radius:50%;animation:spin .6s linear infinite;margin:0 auto;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* --- UPLOAD STATUS --- */
+.upload-status{
+  display:none;
+  padding:12px 16px;
+  background:rgba(200,167,62,0.07);
+  border:1px solid rgba(200,167,62,0.15);
+  border-radius:10px;
+  font-size:12px;color:var(--gold3);
+  margin-bottom:16px;
+  align-items:center;gap:10px;
+}
+.upload-status.show{display:flex;}
+.upload-progress{flex:1;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+.upload-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold3));width:0%;transition:width .3s;}
+
+/* --- SUCCESS MODAL --- */
+.overlay{display:none;position:fixed;inset:0;background:rgba(4,8,20,.92);backdrop-filter:blur(14px);z-index:999;align-items:center;justify-content:center;padding:20px;}
+.overlay.open{display:flex;}
+.success-modal{
+  background:linear-gradient(155deg,#0c1830,#091222);
+  border:1px solid rgba(200,167,62,.28);
+  border-radius:26px;padding:50px 40px;
+  max-width:460px;width:100%;text-align:center;
+  animation:popIn .4s cubic-bezier(.34,1.56,.64,1);
+  position:relative;overflow:hidden;
+}
+.success-modal::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:220px;height:2px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);}
+.success-modal::after{content:'';position:absolute;bottom:-80px;right:-80px;width:220px;height:220px;background:radial-gradient(circle,rgba(200,167,62,.06),transparent);border-radius:50%;}
+@keyframes popIn{from{opacity:0;transform:scale(.75) translateY(40px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.check-ring{width:82px;height:82px;border-radius:50%;background:linear-gradient(135deg,rgba(30,138,82,.22),rgba(30,138,82,.06));border:2px solid rgba(46,204,113,.38);display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 22px;animation:bounce .5s .2s both cubic-bezier(.34,1.56,.64,1);}
+@keyframes bounce{from{transform:scale(0)}to{transform:scale(1)}}
+.success-modal h2{font-family:'Unbounded',sans-serif;font-size:17px;font-weight:700;color:var(--txt);margin-bottom:10px;}
+.success-modal p{font-size:13px;color:var(--txt2);line-height:1.7;}
+.report-id{background:rgba(200,167,62,.08);border:1px solid rgba(200,167,62,.2);border-radius:8px;padding:10px 18px;font-family:monospace;font-size:14px;color:var(--gold2);margin:18px 0;letter-spacing:.1em;}
+.btn-ok{padding:12px 36px;background:transparent;border:1px solid rgba(200,167,62,.28);border-radius:10px;color:var(--gold2);font-family:'IBM Plex Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .2s;margin-top:6px;}
+.btn-ok:hover{background:rgba(200,167,62,.08);}
+
+footer{text-align:center;padding:20px;font-size:11px;color:var(--txt3);border-top:1px solid rgba(200,167,62,.07);position:relative;z-index:1;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="logo">
+    <div class="logo-box">🛡️</div>
+    <div>
+      <div class="logo-title">ANTIKORRUPSIYA</div>
+      <div class="logo-sub">Murojaat Portali</div>
+    </div>
+  </div>
+  <div class="header-badge">
+    <span class="dot"></span>
+    Shaxsingiz sir saqlanadi
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-chip">⚖️ O'zbekiston Respublikasi</div>
+  <h1>Korrupsiyani <em>Oshkor Qiling</em><br>Adolatni Himoya Qiling</h1>
+  <p>Korrupsiya holatlari haqida maxfiy ravishda xabar bering. Har bir murojaat ko'rib chiqiladi va tegishli choralar ko'riladi.</p>
+  <div class="secret">
+    <span class="secret-icon">🔒</span>
+    <div>
+      <h4>100% Maxfiylik Kafolati</h4>
+      <p>Murojaatingiz va shaxsiy ma'lumotlaringiz mutlaq maxfiy saqlanadi. Uchinchi shaxslarga hech qanday ma'lumot berilmaydi.</p>
+    </div>
+  </div>
+</div>
+
+<div class="form-wrap">
+  <div class="card">
+    <form id="rForm" novalidate>
+
+      <div class="section-head">👤 Shaxsiy ma'lumotlar</div>
+
+      <div class="row2">
+        <div class="fg" id="fg-name">
+          <label>To'liq ism-sharif<span class="req">*</span></label>
+          <input class="fc" id="i-name" type="text" placeholder="Ismi Familiya Otasining ismi">
+          <div class="err">Ism-sharif majburiy</div>
+        </div>
+        <div class="fg" id="fg-phone">
+          <label>Telefon raqam<span class="req">*</span></label>
+          <input class="fc" id="i-phone" type="tel" placeholder="+998 90 000 00 00">
+          <div class="err">Telefon raqam majburiy</div>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="fg" id="fg-region">
+          <label>Viloyat / Shahar<span class="req">*</span></label>
+          <select class="fc" id="i-region">
+            <option value="">— Tanlang —</option>
+            <option>Toshkent shahri</option><option>Toshkent viloyati</option>
+            <option>Andijon viloyati</option><option>Farg'ona viloyati</option>
+            <option>Namangan viloyati</option><option>Samarqand viloyati</option>
+            <option>Buxoro viloyati</option><option>Navoiy viloyati</option>
+            <option>Qashqadaryo viloyati</option><option>Surxondaryo viloyati</option>
+            <option>Xorazm viloyati</option><option>Sirdaryo viloyati</option>
+            <option>Jizzax viloyati</option><option>Qoraqalpog'iston Resp.</option>
+          </select>
+          <div class="err">Viloyatni tanlang</div>
+        </div>
+        <div class="fg" id="fg-date">
+          <label>Voqea sanasi<span class="req">*</span></label>
+          <input class="fc" id="i-date" type="date">
+          <div class="err">Sana majburiy</div>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:6px;">🏛️ Korrupsiya ma'lumotlari</div>
+
+      <div class="fg" id="fg-org">
+        <label>Korrupsiya sodir bo'lgan tashkilot yoki joy<span class="req">*</span></label>
+        <input class="fc" id="i-org" type="text" placeholder="Tashkilot nomi, manzil yoki mas'ul shaxs">
+        <div class="err">Tashkilot/joy majburiy</div>
+      </div>
+
+      <div class="fg" id="fg-type">
+        <label>Korrupsiya turi<span class="req">*</span></label>
+        <select class="fc" id="i-type">
+          <option value="">— Tanlang —</option>
+          <option>Pora berish / olish</option>
+          <option>Davlat mulkini o'zlashtirish</option>
+          <option>Mansab vazifasini suiiste'mol qilish</option>
+          <option>Noqonuniy boylik orttirish</option>
+          <option>Yashirin manfaat</option>
+          <option>Ruxsatnoma uchun pul undirish</option>
+          <option>Xizmat ko'rsatish uchun noqonuniy to'lov</option>
+          <option>Boshqa</option>
+        </select>
+        <div class="err">Korrupsiya turini tanlang</div>
+      </div>
+
+      <div class="fg" id="fg-desc">
+        <label>Batafsil tavsif<span class="req">*</span></label>
+        <textarea class="fc" id="i-desc" placeholder="Korrupsiya holati haqida batafsil yozing: kim, qachon, qayerda, qanday miqdorda, qanday sharoitda..."></textarea>
+        <div class="err">Tavsif majburiy</div>
+      </div>
+
+      <div class="section-head" style="margin-top:6px;">📎 Asoslovchi dalillar</div>
+
+      <div class="fg" id="fg-file">
+        <label>Video, rasm yoki ovozli xabar<span class="req">*</span> <span style="color:var(--txt3);font-size:10px;">(kamida bittasi)</span></label>
+        <div class="upload-zone" id="uZone" onclick="document.getElementById('fileIn').click()">
+          <input type="file" id="fileIn" accept="video/*,image/*,audio/*" multiple onchange="onFiles(this.files)">
+          <div class="upload-icon">📤</div>
+          <h4>Faylni bosing yoki sudrab keling</h4>
+          <small>Video, rasm, ovozli xabar — maks. 50 MB</small>
+          <div class="type-chips">
+            <span class="chip v">🎬 Video</span>
+            <span class="chip i">🖼️ Rasm</span>
+            <span class="chip a">🎙️ Ovozli xabar</span>
+          </div>
+        </div>
+        <div class="file-list" id="fileList"></div>
+        <div class="err">Kamida bitta fayl yuklash majburiy</div>
+      </div>
+
+      <div class="warning">
+        <h4>⚠️ Muhim ogohlantirish</h4>
+        <p>Yolg'on axborot berish va tuhmat qilish O'zbekiston Respublikasi qonunchiligiga asosan <b style="color:#f1948a">jinoiy va ma'muriy javobgarlik</b>ka sabab bo'ladi. Faqat haqiqiy va isbotlangan ma'lumotlarni yuboring.</p>
+      </div>
+
+      <div class="agree" onclick="tog()">
+        <input type="checkbox" id="chk">
+        <label>Men ogohlantirishni o'qidim va tasdiqlaman. Barcha ma'lumotlar <b>haqiqiy va to'g'ri</b> ekanligini kafolatlaman. Yolg'on axborot uchun qonun oldida javobgar bo'lishimni bilaman.</label>
+      </div>
+
+      <div class="upload-status" id="uploadStatus">
+        <span>📡 Ma'lumotlar yuborilmoqda...</span>
+        <div class="upload-progress"><div class="upload-bar" id="uBar"></div></div>
+      </div>
+
+      <button type="button" class="btn-submit" onclick="send()">
+        <span class="shine"></span>
+        <span id="bTxt">MUROJAAT YUBORISH</span>
+        <div class="spinner" id="bSpin"></div>
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<footer>© 2024 Antikorrupsiya Murojaat Portali — O'zbekiston Respublikasi</footer>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="overlay" id="okModal">
+  <div class="success-modal">
+    <div class="check-ring">✅</div>
+    <h2>Muvaffaqiyatli yuborildi!</h2>
+    <p>Murojaatingiz qabul qilindi va ko'rib chiqish uchun yuborildi.</p>
+    <div class="report-id" id="okId"></div>
+    <p style="font-size:11px;color:var(--txt3);">Ushbu raqamni saqlang — murojaatingizni kuzatish uchun kerak.</p>
+    <button class="btn-ok" onclick="closeOk()">Tushundim, yopish</button>
+  </div>
+</div>
+
+<script>
+// ===== CONFIG: Google Apps Script URL ni shu yerga qo'ying =====
+const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+// =============================================================
+
+let files = [];
+
+function onFiles(list){
+  Array.from(list).forEach(f=>{if(!files.find(u=>u.name===f.name&&u.size===f.size))files.push(f);});
+  renderFiles();
+  document.getElementById('fg-file').classList.remove('error');
+}
+function renderFiles(){
+  const c=document.getElementById('fileList');c.innerHTML='';
+  files.forEach((f,i)=>{
+    const ico=f.type.startsWith('video')?'🎬':f.type.startsWith('audio')?'🎙️':f.type.startsWith('image')?'🖼️':'📄';
+    const sz=f.size<1048576?(f.size/1024).toFixed(1)+' KB':(f.size/1048576).toFixed(1)+' MB';
+    c.innerHTML+=`<div class="file-item"><span>${ico}</span><span class="fi-name">${f.name}</span><span class="fi-size">${sz}</span><span class="fi-del" onclick="rmFile(${i})">✕</span></div>`;
+  });
+}
+function rmFile(i){files.splice(i,1);renderFiles();}
+
+// drag/drop
+const uz=document.getElementById('uZone');
+uz.addEventListener('dragover',e=>{e.preventDefault();uz.classList.add('drag');});
+uz.addEventListener('dragleave',()=>uz.classList.remove('drag'));
+uz.addEventListener('drop',e=>{e.preventDefault();uz.classList.remove('drag');onFiles(e.dataTransfer.files);});
+
+function tog(){const c=document.getElementById('chk');c.checked=!c.checked;}
+
+function valid(){
+  let ok=true;
+  [['fg-name','i-name'],['fg-phone','i-phone'],['fg-region','i-region'],
+   ['fg-date','i-date'],['fg-org','i-org'],['fg-type','i-type'],['fg-desc','i-desc']].forEach(([fg,id])=>{
+    const el=document.getElementById(fg);
+    if(!document.getElementById(id).value.trim()){el.classList.add('error');ok=false;}
+    else el.classList.remove('error');
+  });
+  const ff=document.getElementById('fg-file');
+  if(files.length===0){ff.classList.add('error');ok=false;}else ff.classList.remove('error');
+  if(!document.getElementById('chk').checked){alert("Iltimos, ogohlantirishni o'qib tasdiqlang.");ok=false;}
+  return ok;
+}
+
+async function fileToBase64(file){
+  return new Promise(res=>{
+    const r=new FileReader();
+    r.onload=e=>res(e.target.result.split(',')[1]);
+    r.readAsDataURL(file);
+  });
+}
+
+async function send(){
+  if(!valid()) return;
+  document.getElementById('bTxt').style.display='none';
+  document.getElementById('bSpin').style.display='block';
+  const us=document.getElementById('uploadStatus');
+  us.classList.add('show');
+
+  // Animate progress bar
+  let prog=0;
+  const bar=document.getElementById('uBar');
+  const iv=setInterval(()=>{prog=Math.min(prog+Math.random()*8,88);bar.style.width=prog+'%';},200);
+
+  try {
+    const filesData=[];
+    for(const f of files){
+      if(f.size<=5*1024*1024){ // 5MB limit for base64
+        const b64=await fileToBase64(f);
+        filesData.push({name:f.name,type:f.type,size:f.size,data:b64});
+      } else {
+        filesData.push({name:f.name,type:f.type,size:f.size,data:null,note:'Fayl hajmi katta — metadata saqlandi'});
+      }
+    }
+
+    const payload={
+      name:document.getElementById('i-name').value.trim(),
+      phone:document.getElementById('i-phone').value.trim(),
+      region:document.getElementById('i-region').value,
+      date:document.getElementById('i-date').value,
+      org:document.getElementById('i-org').value.trim(),
+      type:document.getElementById('i-type').value,
+      desc:document.getElementById('i-desc').value.trim(),
+      files:filesData,
+      submittedAt:new Date().toISOString(),
+    };
+
+    let reportId;
+
+    if(SCRIPT_URL==='YOUR_GOOGLE_APPS_SCRIPT_URL'){
+      // Demo mode: save to localStorage
+      reportId='MRJ-'+Date.now().toString(36).toUpperCase();
+      payload.id=reportId;
+      const saved=JSON.parse(localStorage.getItem('ak_reports')||'[]');
+      saved.unshift(payload);
+      localStorage.setItem('ak_reports',JSON.stringify(saved));
+    } else {
+      const res=await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(payload)});
+      const data=await res.json();
+      reportId=data.id||('MRJ-'+Date.now().toString(36).toUpperCase());
+    }
+
+    clearInterval(iv);bar.style.width='100%';
+    setTimeout(()=>{
+      us.classList.remove('show');bar.style.width='0%';
+      document.getElementById('bTxt').style.display='block';
+      document.getElementById('bSpin').style.display='none';
+      document.getElementById('okId').textContent=reportId;
+      document.getElementById('okModal').classList.add('open');
+      document.getElementById('rForm').reset();
+      files=[];renderFiles();
+      document.getElementById('chk').checked=false;
+    },500);
+
+  } catch(e){
+    clearInterval(iv);
+    alert('Xatolik yuz berdi. Iltimos qaytadan urinib ko\'ring.');
+    us.classList.remove('show');
+    document.getElementById('bTxt').style.display='block';
+    document.getElementById('bSpin').style.display='none';
+  }
+}
+
+function closeOk(){document.getElementById('okModal').classList.remove('open');}
+document.getElementById('okModal').addEventListener('click',function(e){if(e.target===this)closeOk();});
+</script>
+</body>
+</html>
